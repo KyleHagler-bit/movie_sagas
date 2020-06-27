@@ -1,27 +1,27 @@
 import React, { Component } from "react";
-import "./HomeListItem.css";
+// import "./Details.css";
 import { Paper, Button, Typography, Grid } from '@material-ui/core'; //use material UI
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-// import Details from "../Details/Details";
 
+class Details extends Component {
 
-class HomeListItem extends Component {
-
-viewDetails = () =>{
-  this.props.history.push("/details")
+componentDidMount() {
+  
+  console.log('inside details.js',this.props.details.id)
+  this.props.dispatch({type: 'GET_DETAILS', payload:this.props.details})
 
 }
 
 
   render() {
-    const { movieItem } = this.props;
+    const { details, id } = this.props;
+    
     return (
       // <Grid item sm={3}>
       <Paper id ='movieContent' style = {{borderRadius: "10%", height: "700px", width: "500px"}} elevation="24" >
-        {movieItem.title} <br/>
-        <img src={movieItem.poster} onClick={this.viewDetails}/> <br/>
-        <p id='description'>{movieItem.description}</p>
+        {details.id} <br/> { details.title}
+        <p id='description'>{details.description}</p>
           
         
       </Paper>
@@ -34,8 +34,8 @@ const mapStateToProps = (state) => {
   return {
     movies: state.movies,
     genres: state.genres,
-    details:state.details
+    details: state.details,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(HomeListItem));
+export default withRouter(connect(mapStateToProps)(Details));

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../modules/pool");
 
-//GET movies to ODM
+//GET movies to DOM
 router.get("/", (req, res) => {
   pool
     .query('SELECT * FROM "movies";')
