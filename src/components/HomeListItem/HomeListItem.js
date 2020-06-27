@@ -8,9 +8,9 @@ import { withRouter } from "react-router";
 
 class HomeListItem extends Component {
 
-viewDetails = () =>{
+viewDetails = (id) =>{
   this.props.history.push("/details")
-
+  this.props.dispatch({type: 'GET_DETAILS', payload:id})
 }
 
 
@@ -18,9 +18,9 @@ viewDetails = () =>{
     const { movieItem } = this.props;
     return (
       // <Grid item sm={3}>
-      <Paper id ='movieContent' style = {{borderRadius: "10%", height: "700px", width: "500px"}} elevation="24" >
+      <Paper id ='movieContent' style = {{borderRadius: "10%", height: "700px", width: "500px"}} elevation={24} >
         {movieItem.title} <br/>
-        <img src={movieItem.poster} onClick={this.viewDetails}/> <br/>
+        <img src={movieItem.poster} onClick={() => this.viewDetails(movieItem.id)}/> <br/>
         <p id='description'>{movieItem.description}</p>
           
         

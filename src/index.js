@@ -30,6 +30,7 @@ function* getMovies(action) {
       console.log('getDetails action', action)
     try {
         const response = yield Axios.get(`/api/details/${action.payload}`); 
+        // const response = yield Axios.get('/api/details', action.payload)
         console.log('function*',response);
     
         yield put({ type: 'SET_DETAILS', payload: response.data }) //
