@@ -7,6 +7,7 @@ import { withRouter } from "react-router";
 class Edit extends Component {
 
   state = {
+    id:this.props.currentItem[0].id,
     title:'',
     description:''
   };
@@ -24,27 +25,50 @@ class Edit extends Component {
   };
 
 
-  submit =() =>{
+  submit =(id) =>{
+    console.log('current state of edit.js on submit',this.state)
+    this.props.dispatch({ type: "CURRENT_ITEM", payload: this.state });
+    this.props.dispatch({type:"UPDATE_MOVIES", payload: this.state})
     this.props.history.push("/details");
-  }
-
-  componentWillUnmount() {
-    this.props.dispatch({ type: "UPDATE_MOVIE", payload: this.state });
   }
 
   render() {
     const { details, id, movies } = this.props;
-  
+    
     return (
       // <Grid item sm={3}>
       <Paper id='detailsContent' style={{ borderRadius: "10%", height: "700px", width: "500px" }} elevation={24} >
         <button onClick={()=>this.props.history.push("/details")}>Cancel</button>
         <button onClick={()=>this.submit()}> Save</button> <br/>
 
-        <input id='editTitle' placeholder='Movie Title'
+        <input id='editTitle' placeholder='Movie Title' 
         onChange={(event) => this.handleChange(event, "title")}></input><br/>
         <input id='editDescription' placeholder='Movie Description'
         onChange={(event) => this.handleChange(event, "description")}></input>
+
+{details.map((item, index) => {
+          let currentId = item.movies_id
+          
+          return (
+            <div id="description">
+
+              <h2>{item.title}</h2>
+              {currentId}
+
+              {movies.map((item, index) => {
+                if (currentId === item.id) {
+                  return (
+                    <>
+                      <p>{item.description}</p>
+
+
+                    </>
+                  );
+                }
+              })}
+            </div>
+          );
+        })}
        
       </Paper>
       //{/* </Grid> */}
@@ -57,6 +81,7 @@ const mapStateToProps = (state) => {
     movies: state.movies,
     genres: state.genres,
     details: state.details,
+    currentItem:state.currentItem
   };
 };
 

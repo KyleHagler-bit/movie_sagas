@@ -11,6 +11,7 @@ class HomeListItem extends Component {
 viewDetails = (id) =>{
   this.props.history.push("/details")
   this.props.dispatch({type: 'GET_DETAILS', payload:id})
+  this.props.dispatch({type: 'CURRENT_ITEM', payload:[{id:id}]})
 }
 
 

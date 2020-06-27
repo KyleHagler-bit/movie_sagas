@@ -13,6 +13,7 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 
 
+
 function* getMovies(action) {
     //wrap it all in try catch
     try {
@@ -42,28 +43,44 @@ function* getMovies(action) {
   }
 
   function* updateMovies(action){
+      console.log('LOOK AT ME',action.payload)
     try {
-        //WHAT DO I DO HERE? V
-        const response = yield Axios.get(`/api/details/${action.payload}`); 
+        
+        const response = yield Axios.put(`/api/details`, action.payload); 
         // const response = yield Axios.get('/api/details', action.payload)
+        yield put({ type: 'SET_DETAILS', payload: response.data })
         console.log('function*',response);
     
-        yield put({ type: 'SET_DETAILS', payload: response.data }) //
+         
       } catch (error) {
-        console.log('Error updating movie', error);
+        console.log('Error updating movie (index.js)', error);
       //   alert('Unable to get  from server');
       }
   }
+
+
 
 // Create the rootSaga generator function
 function* rootSaga() {
 yield takeEvery('GET_MOVIES', getMovies)
 yield takeEvery('GET_DETAILS',getDetails)
 yield takeEvery('UPDATE_MOVIES', updateMovies)
+// yield takeEvery ('CURRENT_ITEM', updateMovies)
 }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
+
+const currentItem = (state=[], action) =>{
+    switch (action.type) {
+        case 'CURRENT_ITEM':
+            return action.payload;
+        default:
+            console.log('currentItem state is', state)
+            return state;
+    }
+    
+}
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -85,7 +102,7 @@ const genres = (state = [], action) => {
     }
 }
 
-// Used to store the movie genres
+// Used to store the movie details
 const details = (state = [], action) => {
     switch (action.type) {
         case 'SET_DETAILS':
@@ -101,6 +118,7 @@ const storeInstance = createStore(
         movies,
         genres,
         details,
+        currentItem
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

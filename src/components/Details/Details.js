@@ -15,7 +15,7 @@ class Details extends Component {
 
   editPage = () =>{
     this.props.history.push("/edit")
-    // this.props.dispatch({type: 'GET_DETAILS', payload:id})
+   
   }
 
   render() {
