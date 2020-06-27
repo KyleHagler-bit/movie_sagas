@@ -27,7 +27,7 @@ class Details extends Component {
         <br />
         {/* <pre>{JSON.stringify(this.props.details)}</pre> */}
         <button onClick={()=>this.props.history.push("/")}>Back To List</button>
-        <button onClick={()=>this.editPage}>Edit</button>
+        <button onClick={()=>this.editPage()}>Edit</button>
 
         {details.map((item, index) => {
           let currentId = item.movies_id

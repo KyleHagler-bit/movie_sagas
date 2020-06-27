@@ -18,8 +18,8 @@ viewDetails = (id) =>{
     const { movieItem } = this.props;
     return (
       // <Grid item sm={3}>
-      <Paper id ='movieContent' style = {{borderRadius: "10%", height: "700px", width: "500px"}} elevation={24} >
-        {movieItem.title} <br/>
+      <Paper id ='movieContent' style = {{borderRadius: "10%", height: "800px", width: "500px"}} elevation={24} >
+        <h1>{movieItem.title}</h1> <br/>
         <img src={movieItem.poster} onClick={() => this.viewDetails(movieItem.id)}/> <br/>
         <p id='description'>{movieItem.description}</p>
           

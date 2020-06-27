@@ -4,7 +4,8 @@ import { HashRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Home from '../Home/Home';
-import Details from '../Details/Details'
+import Details from '../Details/Details';
+import Edit from '../Edit/Edit';
 
 class App extends Component {
   // Renders the entire app on the DOM
@@ -19,6 +20,9 @@ class App extends Component {
           </Route>
           <Route exact path ='/details'>
             <Details/>
+          </Route>
+          <Route exact path ='/edit'>
+            <Edit/>
           </Route>
         </Switch>
       </div>

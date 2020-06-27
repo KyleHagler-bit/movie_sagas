@@ -41,10 +41,25 @@ function* getMovies(action) {
 
   }
 
+  function* updateMovies(action){
+    try {
+        //WHAT DO I DO HERE? V
+        const response = yield Axios.get(`/api/details/${action.payload}`); 
+        // const response = yield Axios.get('/api/details', action.payload)
+        console.log('function*',response);
+    
+        yield put({ type: 'SET_DETAILS', payload: response.data }) //
+      } catch (error) {
+        console.log('Error updating movie', error);
+      //   alert('Unable to get  from server');
+      }
+  }
+
 // Create the rootSaga generator function
 function* rootSaga() {
 yield takeEvery('GET_MOVIES', getMovies)
 yield takeEvery('GET_DETAILS',getDetails)
+yield takeEvery('UPDATE_MOVIES', updateMovies)
 }
 
 // Create sagaMiddleware
