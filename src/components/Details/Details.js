@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import "./Details.css";
-import { Paper, Button, Typography, Grid } from '@material-ui/core'; //use material UI
+import { Paper, Button, IconButton} from '@material-ui/core'; //use material UI
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 class Details extends Component {
 
@@ -15,26 +17,31 @@ class Details extends Component {
 
   editPage = () =>{
     this.props.history.push("/edit")
-   
+  }
+
+  //DOES NOT WORK AT THE MOMENT
+  deleteGenre =(genre)=>{
+    this.props.dispatch({type: "REMOVE_GENRE", payload: genre})
   }
 
   render() {
-    const { details, id, movies } = this.props;
+    const { details, movies } = this.props;
     console.log('inside render', details);
     //Handle case where page is refreshed and state is "lost"
     if (details.length===0){
-      return( <>
+      return( <div > <br/><br/>
         <h1 style={{color:"white"}}>Oops! Page refresh caused an error</h1>
         <Button variant='contained' id='back' onClick={()=>this.props.history.push("/")}>Back To List</Button>
-        </>
+        </div>
       )
     }
     else {
     return (
       // <Grid item sm={3}>
-      
+      <div>
+      <br/> <br/>
       <Paper id='detailsContent' style={{ borderRadius: "10%", height: "700px", width: "500px" }} elevation={24} >
-        <br />
+        <br /> 
         {/* <pre>{JSON.stringify(this.props.details)}</pre> */}
         <Button variant='contained' id='back' onClick={()=>this.props.history.push("/")}>Back To List</Button>
         <Button variant='contained' id='edit' onClick={()=>this.editPage()}>Edit</Button>
@@ -60,7 +67,7 @@ class Details extends Component {
               {/*since using agg_array in database, need to display all genres nicely*/ }
               {item.genres.map((item2,index)=>{
                 return(
-                <li>{item2}</li>)
+                <li>{item2}<IconButton onClick={()=>this.deleteGenre(item2)}><HighlightOffIcon></HighlightOffIcon></IconButton></li>)
               })}
               
             </div>
@@ -70,6 +77,7 @@ class Details extends Component {
 
         
       </Paper> 
+      </div>
       //{/* </Grid> */}
     ); // end return
       }

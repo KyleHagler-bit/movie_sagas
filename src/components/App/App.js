@@ -8,12 +8,21 @@ import Details from '../Details/Details';
 import Edit from '../Edit/Edit';
 import Admin from '../Admin/Admin';
 
+import { AnimatedSwitch } from 'react-router-transition';
+
 class App extends Component {
   // Renders the entire app on the DOM
 
   render() {
     return (
       <Router>
+        {/*This animatedSwitch does not seem to work */}
+        <AnimatedSwitch
+      atEnter={{ opacity: 0 }}
+      atLeave={{ opacity: 0 }}
+      atActive={{ opacity: 1 }}
+      className="switch-wrapper"
+    ></AnimatedSwitch>
         <div className="App">
           <Header />
           <Switch>

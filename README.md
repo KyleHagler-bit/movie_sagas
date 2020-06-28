@@ -7,9 +7,9 @@ The user then may click a button that brings them back to the home page or click
 
 ## Screen Shots
 
-![Home Page]
-![Details Page Example]
-![Edit Page Example]
+![Home Page] (/public/images/movie_list.png)
+![Details Page Example] (/public/images/details.png)
+![Edit Page Example] (/public/images/edit.png)
 
 ## Installations
 
@@ -20,8 +20,8 @@ Material UI
 MIT
 
 ## Stretch Goals
-[]Display the current values in the input (title) and textarea (description) on the Edit Page
- []Display all genres on movie list page. 
+[X]Display the current values in the input (title) and textarea (description) on the Edit Page
+ [X]Display all genres on movie list page. 
  []Move sagas and reducers out of  index.js and into separate files
  []Allow the user to refresh the details or edit page. 
  []Allow the user to add a genre to a movie.

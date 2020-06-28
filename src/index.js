@@ -17,62 +17,80 @@ import { takeEvery, put } from 'redux-saga/effects';
 function* getMovies(action) {
     //wrap it all in try catch
     try {
-      const response = yield Axios.get('/api/movies');
-    //   console.log('function*',response);
-  
-      yield put({ type: 'SET_MOVIES', payload: response.data })
+        const response = yield Axios.get('/api/movies');
+        //   console.log('function*',response);
+
+        yield put({ type: 'SET_MOVIES', payload: response.data })
     } catch (error) {
-      console.log('Error fetching movies', error);
-    //   alert('Unable to get  from server');
+        console.log('Error fetching movies', error);
+        //   alert('Unable to get  from server');
     }
-  }
+}
 
-  function* getDetails(action){
-      console.log('getDetails action', action.payload)
+function* getDetails(action) {
+    console.log('getDetails action', action.payload)
     try {
-        const response = yield Axios.get(`/api/details/${action.payload}`); 
+        const response = yield Axios.get(`/api/details/${action.payload}`);
         // const response = yield Axios.get('/api/details', action.payload)
-        console.log('function*',response);
-    
-        yield put({ type: 'SET_DETAILS', payload: response.data }) 
-      } catch (error) {
+        console.log('function*', response);
+
+        yield put({ type: 'SET_DETAILS', payload: response.data })
+    } catch (error) {
         console.log('Error fetching details', error);
-      //   alert('Unable to get  from server');
-      }
+        //   alert('Unable to get  from server');
+    }
 
-  }
+}
 
-  function* updateMovies(action){
-      console.log('LOOK AT ME',action.payload)
+function* updateMovies(action) {
+    console.log('LOOK AT ME', action.payload)
     try {
-        
-        const response = yield Axios.put(`/api/details/`, action.payload); 
+
+        const response = yield Axios.put(`/api/details/`, action.payload);
         // const response = yield Axios.get('/api/details', action.payload)
         yield put({ type: 'GET_DETAILS', payload: response.data })
         yield put({ type: 'GET_MOVIES', payload: response.data })
-        console.log('function*',response.data);
-    
-         
-      } catch (error) {
+        console.log('function*', response.data);
+
+
+    } catch (error) {
         console.log('Error updating movie (index.js)', error);
-      //   alert('Unable to get  from server');
-      }
-  }
+        //   alert('Unable to get  from server');
+    }
+}
+
+//NOT YET FUNCTIONAL need id right? otherwise need to figure out search and find in SQL
+function* removeGenre(action) {
+    console.log('remove genre action', action)
+    try {
+
+        const response = yield Axios.delete(`/api/details/`, action.payload);
+        // yield put({ type: 'GET_DETAILS', payload: response.data })
+
+        // console.log('function* removeGenre',response.data);
+
+
+    } catch (error) {
+        console.log('Error removing genre', error);
+        //   alert('Unable to get  from server');
+    }
+}
 
 
 
 // Create the rootSaga generator function
 function* rootSaga() {
-yield takeEvery('GET_MOVIES', getMovies)
-yield takeEvery('GET_DETAILS',getDetails)
-yield takeEvery('UPDATE_MOVIES', updateMovies)
-// yield takeEvery ('CURRENT_ITEM', updateMovies)
+    yield takeEvery('GET_MOVIES', getMovies)
+    yield takeEvery('GET_DETAILS', getDetails)
+    yield takeEvery('UPDATE_MOVIES', updateMovies)
+    yield takeEvery('REMOVE_GENRES', removeGenre)
+    // yield takeEvery ('CURRENT_ITEM', updateMovies)
 }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-const currentItem = (state=[], action) =>{
+const currentItem = (state = [], action) => {
     switch (action.type) {
         case 'CURRENT_ITEM':
             return action.payload;
@@ -80,7 +98,7 @@ const currentItem = (state=[], action) =>{
             console.log('currentItem state is', state)
             return state;
     }
-    
+
 }
 
 // Used to store movies returned from the server
@@ -94,6 +112,8 @@ const movies = (state = [], action) => {
 }
 
 // Used to store the movie genres
+//So I never really used this? I did most my genre related things in details.router
+//i.e. SQL/Database
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
@@ -128,6 +148,6 @@ const storeInstance = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
     document.getElementById('root'));
 registerServiceWorker();
