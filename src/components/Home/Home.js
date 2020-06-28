@@ -6,8 +6,8 @@ import { withRouter } from "react-router";
 
 class Home extends Component {
 
+  //when page loas, want movies to appear on the home page
   componentDidMount() {
-    // use component did mount to dispatch an action to request the plantList from the API
     this.props.dispatch({ type: 'GET_MOVIES' })
   }
 

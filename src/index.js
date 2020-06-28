@@ -13,49 +13,38 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 
 
-
+//get movies from database and put onto DOM!
 function* getMovies(action) {
     //wrap it all in try catch
     try {
         const response = yield Axios.get('/api/movies');
-        //   console.log('function*',response);
-
         yield put({ type: 'SET_MOVIES', payload: response.data })
     } catch (error) {
         console.log('Error fetching movies', error);
-        //   alert('Unable to get  from server');
     }
 }
 
+//get and put details onto DOM!
 function* getDetails(action) {
     console.log('getDetails action', action.payload)
     try {
         const response = yield Axios.get(`/api/details/${action.payload}`);
-        // const response = yield Axios.get('/api/details', action.payload)
-        console.log('function*', response);
-
         yield put({ type: 'SET_DETAILS', payload: response.data })
     } catch (error) {
         console.log('Error fetching details', error);
-        //   alert('Unable to get  from server');
     }
-
 }
 
+//Once updated details come in, GET details and movies again. Do I need to get both?
 function* updateMovies(action) {
     console.log('LOOK AT ME', action.payload)
     try {
-
         const response = yield Axios.put(`/api/details/`, action.payload);
-        // const response = yield Axios.get('/api/details', action.payload)
         yield put({ type: 'GET_DETAILS', payload: response.data })
         yield put({ type: 'GET_MOVIES', payload: response.data })
         console.log('function*', response.data);
-
-
     } catch (error) {
         console.log('Error updating movie (index.js)', error);
-        //   alert('Unable to get  from server');
     }
 }
 
@@ -63,20 +52,11 @@ function* updateMovies(action) {
 function* removeGenre(action) {
     console.log('remove genre action', action)
     try {
-
         const response = yield Axios.delete(`/api/details/`, action.payload);
-        // yield put({ type: 'GET_DETAILS', payload: response.data })
-
-        // console.log('function* removeGenre',response.data);
-
-
     } catch (error) {
         console.log('Error removing genre', error);
-        //   alert('Unable to get  from server');
     }
 }
-
-
 
 // Create the rootSaga generator function
 function* rootSaga() {
@@ -98,7 +78,6 @@ const currentItem = (state = [], action) => {
             console.log('currentItem state is', state)
             return state;
     }
-
 }
 
 // Used to store movies returned from the server

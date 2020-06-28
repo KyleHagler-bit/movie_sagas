@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { HashRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
+//Components 
 import Header from '../Header/Header';
 import Home from '../Home/Home';
 import Details from '../Details/Details';
@@ -36,7 +37,7 @@ class App extends Component {
               <Edit /> {/*Allows user to edit details (title and description) of movie */}
             </Route>
             <Route exact path='/admin'>
-              <Admin /> {/*Admin page */}
+              <Admin /> {/*Admin page AT THIS TIME, CANNOT LOG IN*/}
             </Route>
           </Switch>
         </div>

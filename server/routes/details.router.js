@@ -4,13 +4,11 @@ const pool = require("../modules/pool");
 
 //GET details to details page
 router.get('/:id', (req, res) => {
-  // console.log('Inside get on details.router', req.params.id)
   const queryText = `SELECT movies_id, movies.title, array_agg(genres.name) AS genres
   FROM movies
   JOIN junction ON junction.movies_id=movies.id
   JOIN genres ON junction.genres_id=genres.id WHERE movies.id=$1
   GROUP BY movies_id, movies.title ;`
-  // const queryText = `SELECT * FROM movies where id=$1 ` 
   pool
     .query(queryText, [req.params.id])
     .then((result) => {
@@ -22,8 +20,9 @@ router.get('/:id', (req, res) => {
     });
 });
 
+//used to update details for selected movie (that is, title and description)
 router.put('/', (req, res) => {
-  console.log('inside details router',req.body)
+  console.log('inside details router', req.body)
   const updatedMovie = req.body;
 
   const queryText = `UPDATE movies

@@ -3,6 +3,8 @@ const router = express.Router();
 const pool = require("../modules/pool");
 
 //GET movies to DOM
+//Order by id so they don't switch around the page
+//Could always order alphabetically if decided to have users add new movies
 router.get("/", (req, res) => {
   pool
     .query('SELECT * FROM "movies" ORDER BY id;')
