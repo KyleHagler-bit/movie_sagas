@@ -1,0 +1,34 @@
+#appBar{
+  background-color: rgb(55, 33, 155);
+ 
+  
+}
+
+#iconBtn{
+  color: white;
+  display: inline;
+  max-width: 3% !important;
+  position: fixed;
+  
+ 
+ 
+}
+
+#adminBtn{
+  color: white;
+  max-width: 3% !important;
+  right: 0% !important;
+  position: fixed;
+  
+  
+
+}
+
+#pageTitle{
+  vertical-align: center;
+  margin:1%;
+  display: inline;
+  
+  
+  
+}

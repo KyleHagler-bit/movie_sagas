@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./Edit.css";
-import { Paper, Button, Typography, Grid } from '@material-ui/core'; //use material UI
+import { Paper, Button, Input } from '@material-ui/core'; //use material UI
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
 class Edit extends Component {
 
+  //this works for getting the info I need but messes up on refresh
   state = {
     id:this.props.currentItem[0].id,
     title:this.props.currentItem[0].title,
@@ -32,25 +33,27 @@ class Edit extends Component {
     this.props.history.push("/details");
     
   }
-
+ //I tried using conditional to stop refresh error but the state gets upset anyway
   render() {
     const { details, id, movies } = this.props;
-    
+    if (this.props.currentItem.length >0){
     return (
       // <Grid item sm={3}>
+      
       <Paper id='detailsContent' style={{ borderRadius: "10%", height: "700px", width: "500px" }} elevation={24} >
-        <button onClick={()=>this.props.history.push("/details")}>Cancel</button>
-        <button onClick={()=>this.submit()}> Save</button> <br/>
+        <Button id='cancel' variant='contained' onClick={()=>this.props.history.push("/details")}>Cancel</Button>
+        <Button id='save' variant='contained' onClick={()=>this.submit()}> Save</Button> <br/>
 
-        <input id='editTitle' placeholder='Movie Title' defaultValue={this.state.title}
-        onChange={(event) => this.handleChange(event, "title")}></input><br/>
+        <Input id='editTitle' placeholder='Movie Title' defaultValue={this.state.title} 
+        onChange={(event) => this.handleChange(event, "title")}></Input><br/><br/>
         <textarea rows='20' id='editDescription' placeholder='Movie Description' defaultValue={this.state.description}
         onChange={(event) => this.handleChange(event, "description")}></textarea>
 
        
-      </Paper>
+      </Paper> 
       //{/* </Grid> */}
     ); // end return
+    }
   } // end render
 } // end class HomeListItem
 

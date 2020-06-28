@@ -15,3 +15,9 @@
   margin-right: auto;
   margin: 5%;
 }
+
+/* Does something when cursor hovers over movie poster */
+#poster:hover{
+  border: 5px solid rgb(9, 9, 83);
+  box-sizing: border-box;
+}

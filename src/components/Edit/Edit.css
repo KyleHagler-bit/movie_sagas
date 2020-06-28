@@ -1,3 +1,16 @@
 #editDescription{
   width:80%;
 }
+
+#cancel, #save {
+  margin: 1%;
+  background-color: rgb(55, 33, 155);
+  color: white;
+}
+
+#editTitle{
+  margin: 5%;
+  /* border: 1px solid black; */
+  
+  
+}

@@ -21,13 +21,23 @@ class Details extends Component {
   render() {
     const { details, id, movies } = this.props;
     console.log('inside render', details);
+    //Handle case where page is refreshed and state is "lost"
+    if (details.length===0){
+      return( <>
+        <h1 style={{color:"white"}}>Oops! Page refresh caused an error</h1>
+        <Button variant='contained' id='back' onClick={()=>this.props.history.push("/")}>Back To List</Button>
+        </>
+      )
+    }
+    else {
     return (
       // <Grid item sm={3}>
+      
       <Paper id='detailsContent' style={{ borderRadius: "10%", height: "700px", width: "500px" }} elevation={24} >
         <br />
         {/* <pre>{JSON.stringify(this.props.details)}</pre> */}
-        <button onClick={()=>this.props.history.push("/")}>Back To List</button>
-        <button onClick={()=>this.editPage()}>Edit</button>
+        <Button variant='contained' id='back' onClick={()=>this.props.history.push("/")}>Back To List</Button>
+        <Button variant='contained' id='edit' onClick={()=>this.editPage()}>Edit</Button>
 
         {details.map((item, index) => {
           let currentId = item.movies_id
@@ -58,10 +68,11 @@ class Details extends Component {
         })}
 
 
-
-      </Paper>
+        
+      </Paper> 
       //{/* </Grid> */}
     ); // end return
+      }
   } // end render
 } // end class HomeListItem
 

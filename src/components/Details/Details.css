@@ -7,3 +7,9 @@
   vertical-align: top;
   
 }
+
+#back, #edit{
+  margin: 1%;
+  background-color: rgb(55, 33, 155);
+  color: white;
+}

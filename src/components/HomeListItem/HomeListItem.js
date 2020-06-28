@@ -25,7 +25,7 @@ class HomeListItem extends Component {
       // <Grid item sm={3}>
       <Paper id='movieContent' style={{ borderRadius: "10%", height: "800px", width: "500px" }} elevation={24} >
         <h1>{movieItem.title}</h1> <br />
-        <img src={movieItem.poster} onClick={() => this.viewDetails(movieItem.id)} /> <br />
+        <img id='poster' src={movieItem.poster} onClick={() => this.viewDetails(movieItem.id)} /> <br />
         <p id='description'>{movieItem.description}</p>
 
 
