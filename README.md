@@ -13,7 +13,7 @@ NOTE: Clicking on icon in top right will bring you to an admin page. The page ha
 ![Edit Page Example](/public/images/edit.png)
 
 ## Installations
-1. Create database named ```sagas_movie_weekend```
+1. Create database named ```sagas_movies_weekend```
 2. Use data in database.sql file to populate tables
 3. Open up your editor of choice and run an ```npm install```
 4. Run ```npm run server``` in your terminal
