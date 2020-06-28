@@ -27,9 +27,10 @@ class Edit extends Component {
 
   submit =(id) =>{
     console.log('current state of edit.js on submit',this.state)
-    this.props.dispatch({ type: "CURRENT_ITEM", payload: this.state });
+    // this.props.dispatch({ type: "CURRENT_ITEM", payload: this.state });
     this.props.dispatch({type:"UPDATE_MOVIES", payload: this.state})
     this.props.history.push("/details");
+    
   }
 
   render() {

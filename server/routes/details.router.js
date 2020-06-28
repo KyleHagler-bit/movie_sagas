@@ -23,11 +23,12 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/', (req, res) => {
+  console.log('inside details router',req.body)
   const updatedMovie = req.body;
 
   const queryText = `UPDATE movies
   SET "title" = $1, 
-  "description" = $2,
+  "description" = $2
   WHERE id=$3 `;
 
   const queryValues = [

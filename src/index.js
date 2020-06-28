@@ -34,7 +34,7 @@ function* getMovies(action) {
         // const response = yield Axios.get('/api/details', action.payload)
         console.log('function*',response);
     
-        yield put({ type: 'SET_DETAILS', payload: response.data }) //
+        yield put({ type: 'SET_DETAILS', payload: response.data }) 
       } catch (error) {
         console.log('Error fetching details', error);
       //   alert('Unable to get  from server');
@@ -46,10 +46,11 @@ function* getMovies(action) {
       console.log('LOOK AT ME',action.payload)
     try {
         
-        const response = yield Axios.put(`/api/details`, action.payload); 
+        const response = yield Axios.put(`/api/details/`, action.payload); 
         // const response = yield Axios.get('/api/details', action.payload)
-        yield put({ type: 'SET_DETAILS', payload: response.data })
-        console.log('function*',response);
+        yield put({ type: 'GET_DETAILS', payload: response.data })
+        yield put({ type: 'GET_MOVIES', payload: response.data })
+        console.log('function*',response.data);
     
          
       } catch (error) {
