@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import "./Edit.css";
+import "./Edit.css";
 import { Paper, Button, Typography, Grid } from '@material-ui/core'; //use material UI
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
@@ -8,8 +8,8 @@ class Edit extends Component {
 
   state = {
     id:this.props.currentItem[0].id,
-    title:'',
-    description:''
+    title:this.props.currentItem[0].title,
+    description:this.props.currentItem[0].description
   };
 
   componentDidMount() {
@@ -42,34 +42,11 @@ class Edit extends Component {
         <button onClick={()=>this.props.history.push("/details")}>Cancel</button>
         <button onClick={()=>this.submit()}> Save</button> <br/>
 
-        <input id='editTitle' placeholder='Movie Title' 
+        <input id='editTitle' placeholder='Movie Title' defaultValue={this.state.title}
         onChange={(event) => this.handleChange(event, "title")}></input><br/>
-        <input id='editDescription' placeholder='Movie Description'
-        onChange={(event) => this.handleChange(event, "description")}></input>
+        <textarea rows='20' id='editDescription' placeholder='Movie Description' defaultValue={this.state.description}
+        onChange={(event) => this.handleChange(event, "description")}></textarea>
 
-{details.map((item, index) => {
-          let currentId = item.movies_id
-          
-          return (
-            <div id="description">
-
-              <h2>{item.title}</h2>
-              {currentId}
-
-              {movies.map((item, index) => {
-                if (currentId === item.id) {
-                  return (
-                    <>
-                      <p>{item.description}</p>
-
-
-                    </>
-                  );
-                }
-              })}
-            </div>
-          );
-        })}
        
       </Paper>
       //{/* </Grid> */}

@@ -28,7 +28,7 @@ function* getMovies(action) {
   }
 
   function* getDetails(action){
-      console.log('getDetails action', action)
+      console.log('getDetails action', action.payload)
     try {
         const response = yield Axios.get(`/api/details/${action.payload}`); 
         // const response = yield Axios.get('/api/details', action.payload)

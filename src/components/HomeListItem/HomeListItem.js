@@ -8,23 +8,27 @@ import { withRouter } from "react-router";
 
 class HomeListItem extends Component {
 
-viewDetails = (id) =>{
-  this.props.history.push("/details")
-  this.props.dispatch({type: 'GET_DETAILS', payload:id})
-  this.props.dispatch({type: 'CURRENT_ITEM', payload:[{id:id}]})
-}
+  viewDetails = (id) => {
+    this.props.history.push("/details")
+    this.props.dispatch({ type: 'GET_DETAILS', payload: id })
+    this.props.dispatch({ type: 'CURRENT_ITEM', payload: [
+      { id: id, 
+        title: this.props.movieItem.title, 
+        description: this.props.movieItem.description }
+      ] })
+  }
 
 
   render() {
     const { movieItem } = this.props;
     return (
       // <Grid item sm={3}>
-      <Paper id ='movieContent' style = {{borderRadius: "10%", height: "800px", width: "500px"}} elevation={24} >
-        <h1>{movieItem.title}</h1> <br/>
-        <img src={movieItem.poster} onClick={() => this.viewDetails(movieItem.id)}/> <br/>
+      <Paper id='movieContent' style={{ borderRadius: "10%", height: "800px", width: "500px" }} elevation={24} >
+        <h1>{movieItem.title}</h1> <br />
+        <img src={movieItem.poster} onClick={() => this.viewDetails(movieItem.id)} /> <br />
         <p id='description'>{movieItem.description}</p>
-          
-        
+
+
       </Paper>
       //{/* </Grid> */}
     ); // end return
@@ -35,7 +39,7 @@ const mapStateToProps = (state) => {
   return {
     movies: state.movies,
     genres: state.genres,
-    details:state.details
+    details: state.details
   };
 };
 

@@ -4,7 +4,7 @@ const pool = require("../modules/pool");
 
 //GET details to details page
 router.get('/:id', (req, res) => {
-  console.log('Inside get on details.router', req.params.id)
+  // console.log('Inside get on details.router', req.params.id)
   const queryText = `SELECT movies_id, movies.title, array_agg(genres.name) AS genres
   FROM movies
   JOIN junction ON junction.movies_id=movies.id
