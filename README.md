@@ -7,9 +7,9 @@ The user then may click a button that brings them back to the home page or click
 
 ## Screen Shots
 
-![Home Page] (/public/images/movie_list.png)
-![Details Page Example] (/public/images/details.png)
-![Edit Page Example] (/public/images/edit.png)
+![Home Page](/public/images/movie_list.png)
+![Details Page Example](/public/images/details.png)
+![Edit Page Example](/public/images/edit.png)
 
 ## Installations
 
