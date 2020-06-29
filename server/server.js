@@ -15,6 +15,9 @@ app.use("/api/movies", movieRouter);
 const detailsRouter=require ("./routes/details.router.js")
 app.use("/api/details", detailsRouter)
 
+const genresRouter=require ("./routes/genres.router.js")
+app.use("/api/genres", genresRouter)
+
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
     console.log('Listening on port: ', port);

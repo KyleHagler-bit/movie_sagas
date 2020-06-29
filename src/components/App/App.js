@@ -8,6 +8,7 @@ import Home from '../Home/Home';
 import Details from '../Details/Details';
 import Edit from '../Edit/Edit';
 import Admin from '../Admin/Admin';
+import AdminLogin from '../AdminLogin/AdminLogin'
 
 import { AnimatedSwitch } from 'react-router-transition';
 
@@ -19,11 +20,11 @@ class App extends Component {
       <Router>
         {/*This animatedSwitch does not seem to work */}
         <AnimatedSwitch
-      atEnter={{ opacity: 0 }}
-      atLeave={{ opacity: 0 }}
-      atActive={{ opacity: 1 }}
-      className="switch-wrapper"
-    ></AnimatedSwitch>
+          atEnter={{ opacity: 0 }}
+          atLeave={{ opacity: 0 }}
+          atActive={{ opacity: 1 }}
+          className="switch-wrapper"
+        ></AnimatedSwitch>
         <div className="App">
           <Header />
           <Switch>
@@ -37,7 +38,10 @@ class App extends Component {
               <Edit /> {/*Allows user to edit details (title and description) of movie */}
             </Route>
             <Route exact path='/admin'>
-              <Admin /> {/*Admin page AT THIS TIME, CANNOT LOG IN*/}
+              <Admin /> {/*Admin page User: camera, Pass: action*/}
+            </Route>
+            <Route exact path='/adminLogin'>
+              <AdminLogin /> {/*Currently displays list of genres that appear in the database*/}
             </Route>
           </Switch>
         </div>

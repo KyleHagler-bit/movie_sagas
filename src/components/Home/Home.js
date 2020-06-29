@@ -6,7 +6,7 @@ import { withRouter } from "react-router";
 
 class Home extends Component {
 
-  //when page loas, want movies to appear on the home page
+  //when page loads, want movies to appear on the home page
   componentDidMount() {
     this.props.dispatch({ type: 'GET_MOVIES' })
   }

@@ -58,12 +58,23 @@ function* removeGenre(action) {
     }
 }
 
+function* getGenres(action) {
+   
+    try {
+        const response = yield Axios.get(`/api/genres/`);
+        yield put({ type: 'SET_GENRES', payload: response.data })
+    } catch (error) {
+        console.log('Error fetching genres', error);
+    }
+}
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('GET_MOVIES', getMovies)
     yield takeEvery('GET_DETAILS', getDetails)
     yield takeEvery('UPDATE_MOVIES', updateMovies)
     yield takeEvery('REMOVE_GENRES', removeGenre)
+    yield takeEvery('GET_GENRES', getGenres)
     // yield takeEvery ('CURRENT_ITEM', updateMovies)
 }
 
@@ -91,8 +102,6 @@ const movies = (state = [], action) => {
 }
 
 // Used to store the movie genres
-//So I never really used this? I did most my genre related things in details.router
-//i.e. SQL/Database
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
